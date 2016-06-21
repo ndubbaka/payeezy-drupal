@@ -88,18 +88,13 @@ RUN mkdir -p /var/www/sites/default/files && \
 RUN /etc/init.d/mysql start && \
 	cd /var/www && \
 	drush site-install -y testing --db-url=mysql://root:@localhost/drupal --site-name=Drulenium --account-pass=admin
-RUN /etc/init.d/mysql start && \
-	cd /var/www && \
-	drush dl drulenium-7.x-2.x-dev -y && \
-	drush en drulenium -y && \
-	drush en drulenium_tests -y && \
-	drush en libraries -y && \
-	drush vr-download-webdriver && \
+RUN drush dl drulenium-7.x-2.x-dev -y && \
+	drush en drulenium -y
+RUN drush en drulenium_tests -y && \
+	drush en libraries -y
+RUN drush vr-download-webdriver && \
 	drush dl admin_menu devel && \
-	drush en -y admin_menu && \
-	drush vset "admin_menu_tweak_modules" 1 && \
-	drush vset "admin_theme" "seven" && \
-	drush vset "node_admin_theme" 1
+	drush en -y admin_menu
 
 EXPOSE 80 3306 22
 CMD exec supervisord -n
