@@ -92,7 +92,6 @@ RUN /etc/init.d/mysql start && \
 	drush en drulenium -y && \
 	drush en drulenium_tests -y && \
 	drush en libraries -y && \
-	# To download selenium webdriver library
 	drush vr-download-webdriver && \
 	drush dl admin_menu devel && \
 	drush en -y admin_menu && \
