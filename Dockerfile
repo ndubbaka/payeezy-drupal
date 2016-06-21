@@ -87,7 +87,9 @@ RUN mkdir -p /var/www/sites/default/files && \
 	chown -R www-data:www-data /var/www/
 RUN /etc/init.d/mysql start && \
 	cd /var/www && \
-	drush site-install -y testing --db-url=mysql://root:@localhost/drupal --site-name=Drulenium --account-pass=admin && \
+	drush site-install -y testing --db-url=mysql://root:@localhost/drupal --site-name=Drulenium --account-pass=admin
+RUN /etc/init.d/mysql start && \
+	cd /var/www && \
 	drush dl drulenium-7.x-2.x-dev -y && \
 	drush en drulenium -y && \
 	drush en drulenium_tests -y && \
