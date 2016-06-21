@@ -86,9 +86,15 @@ RUN mkdir -p /var/www/sites/default/files && \
 	chown -R www-data:www-data /var/www/
 RUN /etc/init.d/mysql start && \
 	cd /var/www && \
-	drush si -y minimal --db-url=mysql://root:@localhost/drupal --account-pass=admin && \
+	drush site-install -y testing --db-url=mysql://root:@localhost/drupal --site-name=Drulenium --account-pass=admin && \
+	drush dl drulenium-7.x-2.x-dev -y && \
+	drush en drulenium -y && \
+	drush en drulenium_tests -y && \
+	drush en libraries -y && \
+	# To download selenium webdriver library
+	drush vr-download-webdriver && \
 	drush dl admin_menu devel && \
-	drush en -y admin_menu simpletest devel && \
+	drush en -y admin_menu && \
 	drush vset "admin_menu_tweak_modules" 1 && \
 	drush vset "admin_theme" "seven" && \
 	drush vset "node_admin_theme" 1
