@@ -22,6 +22,7 @@ RUN apt-get install -y \
 	phpmyadmin \
 	wget \
 	unzip \
+	imagemagick \
 	supervisor
 RUN apt-get clean
 
