@@ -23,9 +23,33 @@ RUN apt-get install -y \
 	wget \
 	unzip \
 	imagemagick \
+	default-jre
+
+RUN apt-get install -y \
+	libxss1 \
+	libappindicator1 \
+	libindicator7 \
+	xvfb \
 	supervisor
 RUN apt-get clean
 
+# Install Chrome & Selenium.
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome*.deb
+RUN apt-get install -f -y
+
+RUN wget -N http://chromedriver.storage.googleapis.com/2.20/chromedriver_linux64.zip
+RUN unzip chromedriver_linux64.zip
+RUN chmod +x chromedriver
+RUN mv -f chromedriver /usr/local/share/chromedriver
+RUN ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+RUN ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+
+#COPY install-chrome.sh install-chrome.sh
+#CMD ["/install-chrome.sh"]
+RUN wget http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar
+RUN java -jar selenium-server-standalone-2.39.0.jar &
+ 
 # Install Composer.
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
