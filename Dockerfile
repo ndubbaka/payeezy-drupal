@@ -3,7 +3,8 @@ MAINTAINER Wouter Admiraal <wad@wadmiraal.net>
 ENV DEBIAN_FRONTEND noninteractive
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# Install packages.
+# Install packages. http://serverfault.com/questions/690639/api-get-error-reading-from-server-under-docker
+RUN apt-get clean
 RUN apt-get update
 RUN apt-get install -y \
 	vim \
@@ -23,6 +24,7 @@ RUN apt-get install -y \
 	wget \
 	unzip \
 	imagemagick \
+	postfix \
 	supervisor
 RUN apt-get clean
 
@@ -89,8 +91,9 @@ RUN /etc/init.d/mysql start && \
 	drush site-install -y standard --db-url=mysql://root:@localhost/drupal --site-name=Drulenium --account-pass=admin
 RUN /etc/init.d/mysql start && \
     cd /var/www && \
-    drush dl drulenium-7.x-2.x-dev -y && \
-    drush en drulenium -y && \
+    drush dl drulenium -y && \
+    drush en drulenium drulenium_local_selenium -y && \
+    drush vset --yes drulenium_vr_release_imagemagick_path '/usr/bin' && \
     drush en libraries -y && \
     drush vr-download-webdriver && \
     drush dl admin_menu devel && \

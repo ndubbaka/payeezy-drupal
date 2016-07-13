@@ -1,0 +1,13 @@
+drulenium:
+  build: .
+  ports:
+    - "8080:80"
+    - "8022:22"
+
+browser:
+  hostname: browser
+  image: selenium/standalone-firefox
+  links:
+    - drulenium
+  ports:
+    - "4444:4444"
