@@ -45,7 +45,12 @@ Notice that there are several branches. The `master` branch always refers to the
 
 Running it
 ----------
-After ```docker-compose up``` Go to http://<my-docer-machine-ip-address>:8080/ 
+After ```docker-compose up``` Go to http://[my-docer-machine-ip-address]:8080/
+You can get the IP by running the command ```docker-machine ip```
+Log into the Drupal site as admin `admin:admin`
+Configure Drulenium module settings at Go to http://[my-docer-machine-ip-address]:8080/drulenium/settings/local with selenium Host URL like http://[my-docer-machine-ip-address]:4444/wd/hub
+Choose the local server as Snapshot server at http://[my-docer-machine-ip-address]:8080/drulenium/settings
+And run your tests at http://[my-docer-machine-ip-address]:8080/drulenium/vr
 
 ### Using Drush
 
