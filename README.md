@@ -3,6 +3,28 @@ Drulenium testing with Docker
 
 Quick and easy to use Docker container for your *local Drulenium testing*. It contains a LAMP stack and an SSH server, along with an up to date version of Drush. It is based on [Debian Jessie](https://wiki.debian.org/DebianJessie).
 
+Installation
+------------
+
+### Github
+
+Clone the repository locally and build it:
+
+	git clone git@github.com:TechNikh/docker-drulenium.git
+	cd docker-drulenium
+	docker-compose up
+
+Notice that there are several branches. The `master` branch always refers to the current recommended major Drulenium version.
+
+Running it
+----------
+1. After ```docker-compose up``` Go to http://[my-docer-machine-ip-address]:8080/
+2. You can get the IP by running the command ```docker-machine ip```
+3. Log into the Drupal site as admin with username & password -> `admin:admin`
+4. Configure Drulenium module settings at http://[my-docer-machine-ip-address]:8080/drulenium/settings/local with selenium Host URL like http://[my-docer-machine-ip-address]:4444/wd/hub
+5. Choose the local server as Snapshot server at http://[my-docer-machine-ip-address]:8080/drulenium/settings
+6. And run your tests at http://[my-docer-machine-ip-address]:8080/drulenium/vr
+
 Summary
 -------
 
@@ -29,28 +51,6 @@ When launching, the container will contain a fully-installed, ready to use Drupa
 * 80 (Apache)
 * 22 (SSH)
 * 3306 (MySQL)
-
-Installation
-------------
-
-### Github
-
-Clone the repository locally and build it:
-
-	git clone git@github.com:TechNikh/docker-drulenium.git
-	cd docker-drulenium
-	docker-compose up
-
-Notice that there are several branches. The `master` branch always refers to the current recommended major Drulenium version.
-
-Running it
-----------
-After ```docker-compose up``` Go to http://[my-docer-machine-ip-address]:8080/
-You can get the IP by running the command ```docker-machine ip```
-Log into the Drupal site as admin `admin:admin`
-Configure Drulenium module settings at Go to http://[my-docer-machine-ip-address]:8080/drulenium/settings/local with selenium Host URL like http://[my-docer-machine-ip-address]:4444/wd/hub
-Choose the local server as Snapshot server at http://[my-docer-machine-ip-address]:8080/drulenium/settings
-And run your tests at http://[my-docer-machine-ip-address]:8080/drulenium/vr
 
 ### Using Drush
 
