@@ -8,6 +8,6 @@ browser:
   hostname: browser
   image: selenium/standalone-firefox
   links:
-    - drulenium
+    - payeezy
   ports:
     - "4444:4444"
