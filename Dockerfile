@@ -78,7 +78,7 @@ RUN echo "xdebug.max_nesting_level = 300" >> /etc/php5/cli/conf.d/20-xdebug.ini
 RUN rm -rf /var/www
 RUN cd /var && \
 	drush dl commerce_kickstart-7.x && \
-	mv /var/drupal* /var/www
+	mv /var/commerce_kickstart* /var/www
 RUN mkdir -p /var/www/sites/default/files && \
 	chmod a+w /var/www/sites/default -R && \
 	mkdir /var/www/sites/all/modules/contrib -p && \
