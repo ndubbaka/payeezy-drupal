@@ -77,7 +77,7 @@ RUN echo "xdebug.max_nesting_level = 300" >> /etc/php5/cli/conf.d/20-xdebug.ini
 # Install Drupal.
 RUN rm -rf /var/www
 RUN cd /var && \
-	drush dl drupal-7.44 && \
+	drush dl commerce_kickstart-7.x && \
 	mv /var/drupal* /var/www
 RUN mkdir -p /var/www/sites/default/files && \
 	chmod a+w /var/www/sites/default -R && \
@@ -88,14 +88,9 @@ RUN mkdir -p /var/www/sites/default/files && \
 	chown -R www-data:www-data /var/www/
 RUN /etc/init.d/mysql start && \
 	cd /var/www && \
-	drush site-install -y standard --db-url=mysql://root:@localhost/drupal --site-name=Drulenium --account-pass=admin
+	drush site-install -y commerce_kickstart --db-url=mysql://root:@localhost/drupal --site-name=Payeezy --account-pass=admin
 RUN /etc/init.d/mysql start && \
     cd /var/www && \
-    drush dl drulenium -y && \
-    drush en drulenium drulenium_local_selenium -y && \
-    drush vset --yes drulenium_vr_release_imagemagick_path '/usr/bin' && \
-    drush en libraries -y && \
-    drush vr-download-webdriver && \
     drush dl admin_menu devel && \
     drush en -y admin_menu
 
